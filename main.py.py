@@ -2,7 +2,7 @@ from fastapi import FastAPI, Query
 
 app = FastAPI()
 
-# --- Temporary data (acting as our database for now) ---
+
 products = [
     {"id": 1, "name": "Wireless Mouse", "price": 499, "category": "Electronics", "in_stock": True},
     {"id": 2, "name": "Notebook", "price": 99, "category": "Stationery", "in_stock": True},
@@ -14,19 +14,19 @@ products = [
     {"id": 7, "name": "Webcam", "price": 1299, "category": "Electronics", "in_stock": False},
 ]
 
-# --- Endpoint 0 : Home ---
+
 @app.get("/")
 def home():
     return {"message": "Welcome to our E-commerce API"}
 
 
-# --- Endpoint 1 : Return all products ---
+
 @app.get("/products")
 def get_all_products():
     return {"products": products, "total": len(products)}
 
 
-# --- Endpoint 2 : Filter products ---
+
 @app.get("/products/filter")
 def filter_products(
     category: str = Query(None, description="Electronics or Stationery"),
@@ -119,4 +119,5 @@ def get_product(product_id: int):
         if product["id"] == product_id:
             return {"product": product}
     return {"error": "Product not found"}
+
  
